@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { ReactNode, ComponentProps } from "react";
 
 export default function Chat() {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -111,7 +112,7 @@ export default function Chat() {
                             children={message.content}
                             remarkPlugins={[remarkGfm]}
                             components={{
-                              code: ({inline, children, ...props}) =>
+                              code: ({inline, children, ...props}: ComponentProps<"code"> & {inline?: boolean}) =>
                                 inline ? (
                                   <code className="bg-blue-100 text-blue-700 px-1 rounded" {...props}>{children}</code>
                                 ) : (
