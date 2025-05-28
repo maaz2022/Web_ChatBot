@@ -4,7 +4,7 @@ import LandingSections from "@/components/LandingSections";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { ArrowDownCircleIcon, MessageCircle, MessageCircleIcon, SendIcon, XIcon } from "lucide-react";
+import { ArrowDownCircleIcon, MessageCircle, MessageCircleIcon, RefreshCcwIcon, SendIcon, XIcon } from "lucide-react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -88,6 +88,22 @@ export default function Chat() {
                     ))
                   ) : (
                     <p>No messages yet</p>
+                  )}
+                  {isLoading && (
+                    <div className="flex flex-row gap-2 items-center justify-center h-full mt-32">
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <Button onClick={stop} className="w-10 h-10" disabled={isLoading}>
+                        <XIcon className="w-5 h-5 text-red-500" />
+                      </Button>
+                    </div>
+                  )}
+                  {error && (
+                    <div className="flex flex-row gap-2 items-center justify-center h-full mt-32">
+                      <p className="text-red-500">An Error Occured</p>
+                      <button onClick={() => reload()} className="w-10 h-10 underline">
+                          Retry
+                      </button>
+                    </div>
                   )}
              </div>
               </ScrollArea>
